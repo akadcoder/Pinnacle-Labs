@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Autocorrect Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-spell-check"></i>
+                <h1>AI Autocorrect Tool</h1>
+            </div>
+            <p class="subtitle">Intelligent Text Correction & Enhancement</p>
+        </header>
+
+        <main class="main-content">
+            <div class="editor-panel">
+                <div class="toolbar">
+                    <div class="tool-group">
+                        <button class="tool-btn active" onclick="setMode('autocorrect')">
+                            <i class="fas fa-magic"></i> 
+                            <span>Autocorrect</span>
+                        </button>
+                        <button class="tool-btn" onclick="setMode('grammar')">
+                            <i class="fas fa-check-circle"></i> 
+                            <span>Grammar</span>
+                        </button>
+                        <button class="tool-btn" onclick="setMode('enhance')">
+                            <i class="fas fa-lightbulb"></i> 
+                            <span>Enhance</span>
+                        </button>
+                    </div>
+                    <div class="tool-group">
+                        <button class="tool-btn" onclick="clearText()">
+                            <i class="fas fa-eraser"></i> 
+                            <span>Clear</span>
+                        </button>
+                        <button class="tool-btn" onclick="exportText()">
+                            <i class="fas fa-download"></i> 
+                            <span>Export</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="editor-container">
+                    <div class="input-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-edit"></i> Input Text</h3>
+                            <div class="stats">
+                                <span id="word-count">0 words</span>
+                                <span id="char-count">0 characters</span>
+                                <span id="error-count">0 errors</span>
+                            </div>
+                        </div>
+                        <textarea 
+                            id="input-text" 
+                            placeholder="Start typing your text here... The AI will automatically detect and correct errors."
+                            oninput="processText()"
+                            onpaste="setTimeout(processText, 10)"
+                        ></textarea>
+                        <div class="input-controls">
+                            <button class="control-btn" onclick="clearText()">
+                                <i class="fas fa-times"></i> Clear
+                            </button>
+                            <button class="control-btn" onclick="processText()">
+                                <i class="fas fa-sync"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="output-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-check-double"></i> Corrected Text</h3>
+                            <button class="copy-btn" onclick="copyText()">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div id="output-text" class="output-display">
+                            <p class="placeholder">Your corrected text will appear here...</p>
+                        </div>
+                        <div class="output-controls">
+                            <button class="control-btn" onclick="copyText()">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="control-btn" onclick="exportText()">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="suggestions-panel">
+                    <div class="section-header">
+                        <h3><i class="fas fa-lightbulb"></i> Suggestions & Corrections</h3>
+                        <div class="correction-count">
+                            <span id="correction-count">0 corrections</span>
+                        </div>
+                    </div>
+                    <div id="suggestions-list">
+                        <p class="placeholder">Suggestions will appear here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-panel">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h4>Smart Corrections</h4>
+                    <p>AI-powered spelling and grammar corrections</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4>Real-time Processing</h4>
+                    <p>Instant feedback as you type</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h4>Context Awareness</h4>
+                    <p>Understands text context for better suggestions</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Performance Metrics</h4>
+                    <p>Track improvements and corrections</p>
+                </div>
+            </div>
+        </main>
+
+        <div class="loading-overlay" id="loading-overlay">
+            <div class="spinner"></div>
+            <p>Processing text...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
